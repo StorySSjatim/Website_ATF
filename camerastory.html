@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Produk Premium | CameraStory</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg-cream: #F4EFE6; --bg-dark: #1B2A22; --gold: #C5A059; --border-light: #E0D8C8; }
+        * { box-sizing: border-box; }
+        body { font-family: 'Outfit', sans-serif; background-color: var(--bg-cream); color: #222; margin: 0; padding-bottom: 50px; }
+        
+        nav { background: var(--bg-dark); padding: 1.2rem 5%; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .back-btn { color: var(--gold); text-decoration: none; font-weight: 500; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 1.5px; display: inline-block; transition: 0.3s; }
+        .back-btn:hover { color: #fff; transform: translateX(-5px); }
+        
+        .product-page { max-width: 1100px; margin: 4rem auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; padding: 0 5%; align-items: start; }
+        
+        .image-side { display: flex; flex-direction: column; gap: 15px; position: sticky; top: 2rem; }
+        .img-wrapper { position: relative; border-radius: 12px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.08); background: var(--bg-dark); }
+        #main-img { width: 100%; height: 450px; object-fit: cover; display: block; transition: opacity 0.3s ease; }
+        
+        .thumbnail-container { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .thumb-wrapper { border-radius: 8px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.05); background: var(--bg-dark); border: 2px solid transparent; transition: 0.3s; }
+        .thumb { width: 100%; height: 140px; object-fit: cover; display: block; }
+        .thumb-wrapper:hover { border-color: var(--gold); }
+
+        .info-side { background: #fff; padding: 3rem; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); }
+        .badge { display: inline-block; padding: 5px 12px; background: var(--bg-dark); color: var(--gold); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; border-radius: 4px; margin-bottom: 15px; }
+        h1 { font-family: 'Playfair Display', serif; color: var(--bg-dark); font-size: 2.8rem; margin: 0 0 10px 0; line-height: 1.1; }
+        .price-tag { font-size: 2rem; color: var(--gold); font-family: 'Playfair Display', serif; font-weight: 700; margin-bottom: 2.5rem; border-bottom: 1px solid var(--border-light); padding-bottom: 1.5rem; }
+        
+        .input-group { margin-bottom: 1.8rem; }
+        label { display: block; margin-bottom: 8px; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: #555; }
+        select { 
+            width: 100%; 
+            padding: 16px 20px; 
+            border: 1px solid var(--border-light); 
+            border-radius: 8px; 
+            font-family: 'Outfit', sans-serif; 
+            font-size: 1rem; 
+            color: var(--bg-dark); 
+            background-color: #FAFAFA;
+            cursor: pointer; 
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23C5A059' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1.5rem center;
+            background-size: 1.2em;
+            transition: all 0.3s ease;
+        }
+        select:hover { border-color: var(--gold); }
+        select:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.1); background-color: #fff; }
+        
+        .btn-checkout { background: var(--bg-dark); color: var(--gold); width: 100%; padding: 1.2rem; border: 1px solid var(--bg-dark); border-radius: 8px; font-weight: 600; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; transition: all 0.4s; margin-top: 1rem; font-family: 'Outfit', sans-serif; }
+        .btn-checkout:hover { background: var(--gold); color: var(--bg-dark); border-color: var(--gold); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(197, 160, 89, 0.2); }
+
+        @media (max-width: 768px) {
+            .product-page { grid-template-columns: 1fr; gap: 2rem; margin: 2rem auto; }
+            .info-side { padding: 1.5rem; }
+            h1 { font-size: 2.2rem; }
+            #main-img { height: 350px; }
+        }
+    </style>
+</head>
+<body onload="updateVisual()">
+
+    <nav>
+        <a href="index.html" class="back-btn">&larr; Katalog Produk</a>
+    </nav>
+
+    <div class="product-page">
+        <div class="image-side">
+            <div class="img-wrapper">
+                <img id="main-img" src="" alt="Main Product">
+            </div>
+            <div class="thumbnail-container">
+                <div class="thumb-wrapper"><img id="thumb1" class="thumb" src="" alt="Film"></div>
+                <div class="thumb-wrapper"><img id="thumb2" class="thumb" src="" alt="Bundle"></div>
+            </div>
+        </div>
+
+        <div class="info-side">
+            <span class="badge">Edisi Terbatas</span>
+            <h1>Zenit-E Classic</h1>
+            <div class="price-tag" id="display-price">Rp 0</div>
+
+            <div class="input-group">
+                <label>1. Pilihan Lensa Kamera</label>
+                <select id="lens-select" onchange="updateVisual()">
+                    <option value="0" data-placeholder="Belum Pilih Lensa" selected>-- Silakan Pilih Kondisi Lensa --</option>
+                    <option value="1700000" data-img="body_only.jpg">Body Kosong Saja - Rp 1.700.000</option>
+                    <option value="2150000" data-img="helios.jpg">Paket Lensa Helios 44-2 (+ 450rb)</option>
+                    <option value="2500000" data-img="slide2.jpg">Paket Lensa Ricoh (+ 800rb)</option>
+                    <option value="2900000" data-img="katalog2.jpg">Paket Lensa Vintage Premium (+ 1.2jt)</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label>2. Tambahan Roll Film (Opsional)</label>
+                <select id="film-select" onchange="updateVisual()">
+                    <option value="0" data-placeholder="Belum Pilih Roll Film" selected>-- Silakan Pilih Roll Film --</option>
+                    <option value="0" data-placeholder="Tanpa Roll Film">Tidak Perlu Roll Film (+ Rp 0)</option>
+                    <option value="150000" data-img="kodak.jpg">Kodak ColorPlus 200 (+ 150rb)</option>
+                    <option value="175000" data-img="kodak.jpg">Kodak Ultramax 400 (+ 175rb)</option>
+                    <option value="210000" data-img="fuji.jpg">Fujifilm C200 (+ 210rb)</option>
+                    <option value="250000" data-img="fuji.jpg">Fujifilm Superia X-Tra 400 (+ 250rb)</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label>3. Aksesoris Pendukung (Opsional)</label>
+                <select id="bundle-select" onchange="updateVisual()">
+                    <option value="0" data-placeholder="Belum Pilih Aksesoris" selected>-- Silakan Pilih Aksesoris --</option>
+                    <option value="0" data-placeholder="Tanpa Aksesoris">Tidak Perlu Aksesoris (+ Rp 0)</option>
+                    <option value="250000" data-img="slide1.jpg">Starter Kit Pemula (+ 250rb)</option>
+                    <option value="350000" data-img="katalog3.jpg">Beauty Viewer Lens Set (+ 350rb)</option>
+                    <option value="450000" data-img="slide1.jpg">Premium Leather Strap & Case (+ 450rb)</option>
+                </select>
+            </div>
+
+            <button class="btn-checkout" onclick="checkoutNow()">Proses Checkout</button>
+        </div>
+    </div>
+
+    <script>
+        function getPlaceholder(text) {
+            return `data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%231B2A22'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23C5A059' font-family='sans-serif' font-size='32' font-weight='600' letter-spacing='2'%3E${encodeURIComponent(text)}%3C/text%3E%3C/svg%3E`;
+        }
+
+        function updateVisual() {
+            let lens = document.getElementById('lens-select');
+            let film = document.getElementById('film-select');
+            let bundle = document.getElementById('bundle-select');
+            
+            let lensOpt = lens.options[lens.selectedIndex];
+            let filmOpt = film.options[film.selectedIndex];
+            let bundleOpt = bundle.options[bundle.selectedIndex];
+            
+            let mainImg = document.getElementById('main-img');
+            mainImg.style.opacity = 0.8;
+            setTimeout(() => { mainImg.style.opacity = 1; }, 100);
+
+            mainImg.src = lensOpt.hasAttribute('data-img') 
+                ? "images/" + lensOpt.getAttribute('data-img') 
+                : getPlaceholder(lensOpt.getAttribute('data-placeholder'));
+
+            document.getElementById('thumb1').src = filmOpt.hasAttribute('data-img') 
+                ? "images/" + filmOpt.getAttribute('data-img') 
+                : getPlaceholder(filmOpt.getAttribute('data-placeholder'));
+
+            document.getElementById('thumb2').src = bundleOpt.hasAttribute('data-img') 
+                ? "images/" + bundleOpt.getAttribute('data-img') 
+                : getPlaceholder(bundleOpt.getAttribute('data-placeholder'));
+            
+            let total = parseInt(lens.value) + parseInt(film.value) + parseInt(bundle.value);
+            
+            if (total === 0) {
+                document.getElementById('display-price').innerText = 'Pilih Produk Dulu';
+                document.getElementById('display-price').style.fontSize = '1.5rem';
+            } else {
+                document.getElementById('display-price').innerText = 'Rp ' + total.toLocaleString('id-ID');
+                document.getElementById('display-price').style.fontSize = '2rem';
+            }
+        }
+
+        function checkoutNow() {
+            let totalText = document.getElementById('display-price').innerText;
+            if(totalText === 'Pilih Produk Dulu') {
+                alert("Silakan pilih lensa terlebih dahulu sebelum checkout!");
+                return;
+            }
+            let total = totalText.replace(/[^0-9]/g, '');
+            window.location.href = "checkout.html?total=" + total;
+        }
+    </script>
+</body>
+</html>
