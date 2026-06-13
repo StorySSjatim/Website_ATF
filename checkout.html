@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Checkout | CameraStory</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg-cream: #F4EFE6; --bg-dark: #1B2A22; --gold: #C5A059; }
+        body { font-family: 'Outfit', sans-serif; background-color: var(--bg-cream); padding: 3rem 5%; color: #333; }
+        
+        .checkout-container { display: flex; gap: 4rem; flex-wrap: wrap; max-width: 900px; margin: 0 auto; }
+        .box { flex: 1; background: #fff; padding: 30px; border-top: 5px solid var(--bg-dark); box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        
+        h2 { font-family: 'Playfair Display', serif; color: var(--bg-dark); margin-bottom: 1.5rem; }
+        label { display: block; margin-top: 15px; font-weight: 500; }
+        select { width: 100%; padding: 12px; margin-top: 5px; border: 1px solid #ccc; font-family: 'Outfit', sans-serif; }
+        
+        .price-row { display: flex; justify-content: space-between; margin: 15px 0; font-size: 1.1rem; }
+        .total-row { display: flex; justify-content: space-between; margin-top: 20px; font-size: 1.4rem; font-weight: bold; color: var(--gold); }
+        
+        .btn-pay { background: var(--bg-dark); color: var(--gold); width: 100%; padding: 15px; border: none; cursor: pointer; font-weight: bold; text-transform: uppercase; margin-top: 20px; transition: 0.3s; }
+        .btn-pay:hover { background: var(--gold); color: var(--bg-dark); }
+        .back-link { display: block; margin-bottom: 20px; color: var(--bg-dark); text-decoration: none; font-weight: 500; }
+    </style>
+</head>
+<body>
+
+    <div class="checkout-container">
+        <div class="box">
+            <a href="camerastory.html" class="back-link">&larr; Kembali ke Produk</a>
+            <h2>Checkout Pesanan</h2>
+            
+            <label>Pilih Kurir/Kota:</label>
+            <select id="city-select" onchange="calculateFinalTotal()">
+                <option value="10000">Surabaya - Rp 10.000</option>
+                <option value="25000">Jakarta - Rp 25.000</option>
+                <option value="50000">Luar Pulau - Rp 50.000</option>
+            </select>
+
+            <div style="margin-top: 30px;">
+                <div class="price-row"><span>Harga Produk:</span> <span id="base-price-display">Rp 0</span></div>
+                <div class="price-row"><span>Ongkos Kirim:</span> <span id="shipping-cost">Rp 0</span></div>
+                <hr>
+                <div class="total-row"><span>Total Akhir:</span> <span id="final-total">Rp 0</span></div>
+            </div>
+
+            <button class="btn-pay" onclick="alert('Pesanan diproses! Terima kasih telah berbelanja di CameraStory.')">BAYAR SEKARANG</button>
+        </div>
+    </div>
+
+    <script>
+        // Mengambil total dari URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const basePrice = parseInt(urlParams.get('total')) || 0;
+
+        function calculateFinalTotal() {
+            let shipping = parseInt(document.getElementById('city-select').value);
+            let total = basePrice + shipping;
+            
+            // Tampilkan dengan format Rupiah yang rapi
+            document.getElementById('base-price-display').innerText = 'Rp ' + basePrice.toLocaleString('id-ID');
+            document.getElementById('shipping-cost').innerText = 'Rp ' + shipping.toLocaleString('id-ID');
+            document.getElementById('final-total').innerText = 'Rp ' + total.toLocaleString('id-ID');
+        }
+
+        // Jalankan kalkulasi otomatis saat pertama kali halaman terbuka
+        window.onload = calculateFinalTotal;
+    </script>
+</body>
+</html>

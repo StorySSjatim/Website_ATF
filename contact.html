@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Hubungi Admin | CameraStory</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg-cream: #F4EFE6; --bg-dark: #1B2A22; --gold: #C5A059; }
+        body { font-family: 'Outfit', sans-serif; background-color: var(--bg-cream); margin: 0; padding-bottom: 50px; }
+        
+        /* Navigasi Atas */
+        nav { background: var(--bg-dark); padding: 1.5rem 5%; }
+        .back-btn { color: var(--gold); text-decoration: none; font-weight: 500; font-size: 1rem; }
+
+        /* Layout Utama */
+        .page-wrapper { display: flex; flex-direction: column; align-items: center; padding: 2rem; }
+        
+        /* Chat Container */
+        .chat-container { width: 100%; max-width: 450px; background: #fff; border-radius: 25px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); overflow: hidden; border: 1px solid #eee; margin-top: 2rem; }
+        .header { background: var(--bg-dark); color: var(--gold); padding: 25px; text-align: center; font-family: 'Playfair Display', serif; font-size: 1.4rem; }
+        
+        #chatContent { padding: 25px; height: 300px; overflow-y: auto; display: flex; flex-direction: column; }
+        .msg { padding: 12px 18px; border-radius: 20px; margin-bottom: 10px; max-width: 80%; font-size: 0.95rem; }
+        .admin-msg { background: #f0f0f0; color: #333; align-self: flex-start; }
+        .user-msg { background: var(--bg-dark); color: white; align-self: flex-end; }
+
+        .input-area { padding: 20px; display: flex; gap: 10px; background: #fafafa; }
+        input { flex: 1; padding: 12px; border: 1px solid #ddd; border-radius: 8px; outline: none; }
+        button { padding: 10px 20px; background: var(--gold); border: none; border-radius: 8px; color: var(--bg-dark); font-weight: bold; cursor: pointer; }
+
+        /* Social Bar */
+        .social-bar { display: flex; gap: 15px; padding: 20px; justify-content: center; background: #fff; border-top: 1px solid #eee; }
+        .social-btn { padding: 12px 25px; border-radius: 50px; text-decoration: none; font-size: 0.85rem; font-weight: 600; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
+        .wa-btn { background: #25d366; color: white; }
+        .ig-btn { background: #E1306C; color: white; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="back-btn">&larr; Kembali ke Beranda</a>
+    </nav>
+
+    <div class="page-wrapper">
+        <div class="chat-container">
+            <div class="header">CameraStory Support</div>
+            
+            <div id="chatContent">
+                <div class="msg admin-msg">Halo! Ada yang bisa dibantu tentang koleksi kamera kami?</div>
+            </div>
+            
+            <div class="input-area">
+                <input type="text" id="chatInput" placeholder="Tulis pertanyaanmu...">
+                <button onclick="sendChat()">Kirim</button>
+            </div>
+
+            <!-- Social Bar -->
+            <div class="social-bar">
+                <a href="https://wa.me/6281234567890" target="_blank" class="social-btn wa-btn">WhatsApp</a>
+                <a href="https://instagram.com/kamerastory" target="_blank" class="social-btn ig-btn">Instagram</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function sendChat() {
+            const input = document.getElementById('chatInput');
+            const chat = document.getElementById('chatContent');
+            if (input.value.trim() !== "") {
+                // Pesan User
+                chat.innerHTML += `<div class="msg user-msg">${input.value}</div>`;
+                input.value = "";
+                chat.scrollTop = chat.scrollHeight;
+                
+                // Balasan Bot
+                setTimeout(() => {
+                    chat.innerHTML += `<div class="msg admin-msg">Terima kasih pertanyaannya! Admin akan segera membalas detailnya via WhatsApp ya.</div>`;
+                    chat.scrollTop = chat.scrollHeight;
+                }, 800);
+            }
+        }
+    </script>
+</body>
+</html>
