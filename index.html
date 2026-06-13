@@ -46,6 +46,21 @@
         .tag { font-size: 0.8rem; color: #888; text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 1rem; }
         .price { font-weight: 500; color: var(--gold); font-size: 1.2rem; }
         footer { background: var(--bg-dark); color: var(--white); text-align: center; padding: 3rem; font-size: 0.9rem; border-top: 5px solid var(--gold); }
+
+        /* --- CSS RESPONSIF UNTUK HP --- */
+        @media (max-width: 768px) {
+            nav { flex-direction: column; padding: 1rem; position: relative; }
+            .nav-links { gap: 1rem; margin-top: 1rem; flex-wrap: wrap; justify-content: center; }
+            .hero { height: auto; padding-top: 80px; }
+            .slide { flex-direction: column-reverse; height: auto; padding-bottom: 2rem; }
+            .slide-content { padding: 2rem; text-align: center; }
+            .slide-content h2 { font-size: 2rem; }
+            .slide-img-container { height: 250px; width: 100%; }
+            .slide-img-container img { mask-image: none; }
+            .controls { bottom: 10px; width: 100%; justify-content: center; left: 0; }
+            .katalog { padding: 4rem 5%; }
+            .grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
